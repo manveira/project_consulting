@@ -30,6 +30,8 @@
 
 ## PROCESO 
 
+
+
 Primero, debes asegurar las credentials necesarias para usar con tu cuenta de AWS. 
 
 Guarda esas crendenciales en `.aws/credentials`. Una vez las tengas continua con los pasos posteriores.
