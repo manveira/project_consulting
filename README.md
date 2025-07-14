@@ -52,12 +52,16 @@ luego:
 
 Adicional, recuerda haber generado una llave `id_rsa` para conectarte a tu EC2 una vez la crees. Sino las tienes, usa este comando y sigue los pasos que este te indique. (Este comando no es necesario si ya tienes una llave, si la tienes omite este step)
 
-`ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa`    
+```
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
+```    
 
 
 Luego, aplica el resto de la infra:
 
-`terraform apply`
+```
+                            terraform apply
+```
 
 
 Una vez se creen el resto de componentes, intenta conectarte a la instancia EC2 teniendo en cuenta la ip_publica de la instancia.
@@ -65,22 +69,30 @@ Una vez se creen el resto de componentes, intenta conectarte a la instancia EC2 
 
 Para ello, creé un output llamado **ssh_connection** que te muestra el comando listo para conectarte, siempre y cuando tu `id_rsa` se encuentre en la ruta por defecto `~/.ssh/id_rsa`. Veras algo como esto:
 
-`ssh -i ~/.ssh/id_rsa ubuntu@<IP_PUBLICA>`
+```
+                    ssh -i ~/.ssh/id_rsa ubuntu@<IP_PUBLICA>
+```
 
 
 Por ejemplo:
 
-`ssh -i ~/.ssh/id_rsa ubuntu@3.84.3.198`
+```
+                    ssh -i ~/.ssh/id_rsa ubuntu@3.84.3.198
+```
 
 
 Para validar que está corriendo el webserver con apache, haz un curl o por tu navegador de internet a:
 
-`curl http://<ip_publica_EC2_instance>`
+```
+                    curl http://<ip_publica_EC2_instance>
+```
 
 
 ejemplo:
 
-`curl http://44.212.2.145`
+```
+                    curl http://44.212.2.145
+```
 
 
 O desde el navegador abre una pestaña nueva y digita `http://<ip_publica_EC2_instance>`. No olvides que si estás redireccionando a https, no te cargará la pagina, ya que estarías ingresando por el puerto 443, el cual no está activo para este dominio. Por ende, debes siempre garantizar que le apuntas al http para que consumas por el puerto 80.
@@ -93,14 +105,16 @@ O desde el navegador abre una pestaña nueva y digita `http://<ip_publica_EC2_in
 Primero, se exportó temporalmente en la terminal local mis credenciales de Dockerhub.
 
 ```
-    export DOCKERHUB_USERNAME="<Your_dockerhub_user>"
-    export DOCKERHUB_PASSWORD="<Your_dockerhub_password>"
+            export DOCKERHUB_USERNAME="<Your_dockerhub_user>"
+            export DOCKERHUB_PASSWORD="<Your_dockerhub_password>"
 ```
 
 
 Luego, logueate con el sgte comando:
 
-`echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin`
+```
+    echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+```
 
 
 Deberias ver un **login succeded** si todo salió bien. 
@@ -108,17 +122,23 @@ Deberias ver un **login succeded** si todo salió bien.
 
 Luego, pasate a la ruta local donde tienes el dockerfile y ejecuta:
 
-`docker build -t $DOCKERHUB_USERNAME/consulting:v1 .`
+```
+            docker build -t $DOCKERHUB_USERNAME/consulting:v1 .
+```
 
 
 Lista las imagenes docker en tu local y comprueba que exista la que acabas de crear:
 
-`docker image ls`
+```
+            docker image ls
+```
 
 
 Una vez compruebes que existe localmente, haz el push a dockerhub para publicarla:
 
-`docker push $DOCKERHUB_USERNAME/consulting:v1`
+```
+        docker push $DOCKERHUB_USERNAME/consulting:v1
+```
 
 
 Dirigete a tu registry publico, en mi caso Dockerhub, haz login desde la interfaz, ingresa a tus repositorios y valida que se publicó la imagen anterior.
@@ -126,7 +146,9 @@ Dirigete a tu registry publico, en mi caso Dockerhub, haz login desde la interfa
 
 Para realizar una prueba puedes correr un contenedor de prueba ejecutando un comando como este:
 
-`docker run -d -p 80:80 --name app_consulting manveira/consulting:v1`
+```
+    docker run -d -p 80:80 --name app_consulting manveira/consulting:v1
+```
 
 
 
@@ -135,17 +157,23 @@ Para realizar una prueba puedes correr un contenedor de prueba ejecutando un com
 
 Una vez se cree todo el proyecto, ingresa a tu EC2 server en estado running con el comando citado en sesiones previas de este documento. 
 
-`ssh -i ~/.ssh/id_rsa ubuntu@<IP_PUBLICA>`
+```
+        ssh -i ~/.ssh/id_rsa ubuntu@<IP_PUBLICA>
+```
 
 
 Una vez dentro, lista los contenedores docker corriendo con:
 
-`docker ps`
+```
+            docker ps
+```
 
 
 Deberás ver un contenedor llamado `app_consulting`. Para conectarte e iniciar validaciones usa este comando:
 
-`docker exec -it app_consulting bash`
+```
+        docker exec -it app_consulting bash
+```
 
 
 Una vez dentro del conetenedor, lanza los comandos listados debajo uno por uno para validar que están instaladas todas las dependencias solicitadas en el archivo llamado **Requerimiento_prueba_tecnica.md**
@@ -168,7 +196,9 @@ Los comandos uno por a listar serían:
 
 Una vez validado lo anterior, puedes lanzar un curl a `localhost:80` para validar que puedes ver lo que está desplegado en el webserver. Como es puerto **80**, no es necesario especificar el puerto ya que èl lo toma por defecto.
     
-`curl localhost`
+```
+            curl localhost
+```
 
 
 Deberás ver una respuesta html con el mensaje **hola mundo**.
@@ -176,7 +206,9 @@ Deberás ver una respuesta html con el mensaje **hola mundo**.
 
 Ahora, para realizar la validaciòn de conexión entre el Docker y la DynamoDB realizamos lo sgte:
 
-`aws dynamodb list-tables --region us-east-1`
+```
+        aws dynamodb list-tables --region us-east-1
+```
 
 
 Al realizar el comando anterior y que no nos deniegue o rechace la petición indica que ese contenedor a través del Role IAM de la instancia, hereda sus permisos y se autentica contra el servicio de DynamoDB. Puesto que en la policy atachada al role tiene estos permisos o actions.
@@ -234,7 +266,9 @@ Todo lo anterior para ahorro de costos y no incrementar cargos en facturación.
 
 Para ello, dirijase a la carpeta `/infrastructure` en la raíz del proyecto y ejecute el comando:
 
-`terraform destroy`
+```
+                terraform destroy
+```
 
 
 
