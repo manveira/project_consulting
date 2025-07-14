@@ -39,7 +39,7 @@ Antes de iniciar debes garantizar que el recurso dynamoDB exista al igual que el
 Una vez se cree el bucket, dirigete a la carpeta **infrastructure** de este repositorio y lanza este comando:
 
 ```
-terraform init
+    terraform init
 ```
 
 
