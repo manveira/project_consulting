@@ -4,22 +4,28 @@
 ## ESTRUCTURACIÓN DE ARCHIVOS
 
 ```
-├── infrastructure/
-│   └── terraform.lock.hcl # Lock file de proveedores
-│   ├── backend.tf         # Configuración de backend S3 + locking
-│   ├── iam.tf             # IAM Recursos y roles
-│   ├── keypair.tf         # Keypair to access EC2
-│   ├── main.tf            # Recursos EC2 y DynamoDB
-│   ├── networking.tf      # Recursos Networking
-│   ├── outputs.tf         # Salidas del proyecto
-│   ├── provider.tf        # Proveedor AWS
-│   ├── security.tf        # Grupo de seguridad SSH
-│   ├── state.tf           # DynamoDB state
-│   ├── variables.tf       # Variables de entrada
 ├── docker/
-│   └── Dockerfile         # Imagen personalizada Linux + herramientas
-│   └── index.html         # Archivo HTML a mostrar en web server
-└── README.md              # Documentación
+│   └── Dockerfile                              # Imagen personalizada Linux + herramientas
+│   └── index.html                              # Archivo HTML a mostrar en web server
+├── evidencias/
+│   └── imagen1.png                             # Imagen de evidencia 1
+│   └── imagenN.png                             # Imagen de evidencia N
+├── infrastructure/
+│   └── terraform.lock.hcl                      # Lock file de proveedores
+│   ├── backend.tf                              # Configuración de backend S3 + locking
+│   ├── iam.tf                                  # IAM Recursos y roles
+│   ├── keypair.tf                              # Keypair para acceder a EC2
+│   ├── main.tf                                 # EC2 y DynamoDB
+│   ├── networking.tf                           # Recursos Networking
+│   ├── outputs.tf                              # Outputs del proyecto
+│   ├── provider.tf                             # Configuraciones Proveedor AWS
+│   ├── security.tf                             # Security group para EC2 - SSH y HTTP access
+│   ├── state.tf                                # tabla DynamoDB para lock 
+│   ├── variables.tf                            # Variables de terra
+└── .gitignore                                  # archivos o componentes a ignorar por github
+└── Checks.md                                   # Documento que valida o comprueba items requeridos
+└── README.md                                   # Documentación general del proyecto
+└── Requerimiento_prueba_tecnica.md             # Requerimiento a detalle de la prueba técnica
 ```
 
 ## PROCESO 
