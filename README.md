@@ -38,7 +38,9 @@ Antes de iniciar debes garantizar que el recurso dynamoDB exista al igual que el
 
 Una vez se cree el bucket, dirigete a la carpeta **infrastructure** de este repositorio y lanza este comando:
 
-`terraform init`
+```
+terraform init
+```
 
 
 luego:
@@ -46,7 +48,7 @@ luego:
 `terraform apply -target=aws_dynamodb_table.terraform_locks "-lock=false"`
 
 
-Adicional, tecuerda haber generado un llave `id_rsa` para conectarte a tu EC2 una vez la crees. Sino las tienes, usa este comando y sigue los pasos que este te indique. (Este comando no es necesario si ya tienes una llave, si la tienes omite este step)
+Adicional, recuerda haber generado una llave `id_rsa` para conectarte a tu EC2 una vez la crees. Sino las tienes, usa este comando y sigue los pasos que este te indique. (Este comando no es necesario si ya tienes una llave, si la tienes omite este step)
 
 `ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa`    
 
@@ -83,12 +85,14 @@ O desde el navegador abre una pestaña nueva y digita `http://<ip_publica_EC2_in
 
 
 
-*Ahora, para explicar un poco lo relacionado a la imagen docker y lo que se ejecuta en el proceso contenerizado tenemos:*
+
+**Ahora, para explicar un poco lo relacionado a la imagen docker y lo que se ejecuta en el proceso contenerizado tenemos:**
 
 Primero, se exportó temporalmente en la terminal local mis credenciales de Dockerhub.
 
-```export DOCKERHUB_USERNAME="<Your_dockerhub_user>"
-export DOCKERHUB_PASSWORD="<Your_dockerhub_password>"
+```
+    export DOCKERHUB_USERNAME="<Your_dockerhub_user>"
+    export DOCKERHUB_PASSWORD="<Your_dockerhub_password>"
 ```
 
 
