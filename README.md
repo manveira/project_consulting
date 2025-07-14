@@ -273,7 +273,7 @@ Se creó el archivo en la raíz del proyecto llamado **Checks.md** para validar 
 
 
 Finalmente, se crea esta sección para comprobar y validar que el proyecto se implementó correctamente siguiendo las directrices requeridas para sus validaciones.
-Adicional, esta sección también fue creada por si no fuera posible la reproducción del proyecto en otros ambientes o por factores externos agenos, no fuera posible la validación de los mismos.
+Adicional, esta sección también fue creada por si no fuera posible la reproducción del proyecto en otros ambientes o por factores externos ajenos, no fuera posible la validación de los mismos.
 
 
 Para ello, se crea una carpeta en la raíz del proyecto llamada `/evidencias` y en ella se anexan imágenes de validaciones.
