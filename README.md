@@ -39,13 +39,15 @@ Antes de iniciar debes garantizar que el recurso dynamoDB exista al igual que el
 Una vez se cree el bucket, dirigete a la carpeta **infrastructure** de este repositorio y lanza este comando:
 
 ```
-    terraform init
+                            terraform init
 ```
 
 
 luego:
 
-`terraform apply -target=aws_dynamodb_table.terraform_locks "-lock=false"`
+```
+        terraform apply -target=aws_dynamodb_table.terraform_locks "-lock=false"
+```
 
 
 Adicional, recuerda haber generado una llave `id_rsa` para conectarte a tu EC2 una vez la crees. Sino las tienes, usa este comando y sigue los pasos que este te indique. (Este comando no es necesario si ya tienes una llave, si la tienes omite este step)
