@@ -1,0 +1,13 @@
+# Terraform files
+infrastructure/*.tfstate
+infrastructure/*.tfstate.backup
+infrastructure/.terraform/
+
+# Archivos de logs o debugging
+crash.log
+*.log
+
+# Archivos sensibles 
+secrets.*
+*.pem
+*.key
